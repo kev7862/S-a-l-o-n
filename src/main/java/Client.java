@@ -18,7 +18,7 @@ public class Client {
     this.phonenumber = phonenumber;
     this.stylistid = stylistid;
 
-// Trying to Establish a connection into the database clients table and insert parameters.
+// Trying to Establish a connection into the database clients table and insert parameters then update.
     try(Connection cn = DB.sql2o.open()) {
       String sql = "INSERT INTO clients (firstname, lastname, phonenumber, email, age, stylistid) VALUES (:firstname, :lastname, :phonenumber, :email, :age, :stylistid)";
       this.id = (int) cn.createQuery(sql, true)
@@ -73,6 +73,17 @@ public class Client {
         .executeUpdate();
     }
   }
+// Trying to Establish a connection into the database clients table and set and updates last name by id.
+  public void setLastName(String name) {
+  this.lastname=name;
+  try(Connection cn = DB.sql2o.open()) {
+    String sql = "UPDATE clients SET lastname = :lastname WHERE id = :id";
+    cn.createQuery(sql)
+      .addParameter("lastname", name)
+      .addParameter("id", id)
+      .executeUpdate();
+  }
+}
 
 
 }
