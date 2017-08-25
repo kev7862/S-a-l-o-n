@@ -85,5 +85,17 @@ public class Client {
   }
 }
 
+//Trying to Establish a connection into database clients table and set phone number by id.
+public void setPhoneNumber(String phone) {
+    this.phonenumber=phone;
+    try(Connection cn = DB.sql2o.open()) {
+      String sql = "UPDATE clients SET phonenumber = :phonenumber WHERE id = :id";
+      cn.createQuery(sql)
+        .addParameter("phonenumber", phone)
+        .addParameter("id", id)
+        .executeUpdate();
+    }
+  }
+
 
 }
