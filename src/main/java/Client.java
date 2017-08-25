@@ -109,5 +109,17 @@ public void setPhoneNumber(String phone) {
     }
   }
 
+// Trying to Establish a connection to database clients table and set age by id
+  public void setAge(int age) {
+    this.age=age;
+    try(Connection cn = DB.sql2o.open()) {
+      String sql = "UPDATE clients SET age = :age WHERE id = :id";
+      cn.createQuery(sql)
+        .addParameter("age", age)
+        .addParameter("id", id)
+        .executeUpdate();
+    }
+  }
+
 
 }
