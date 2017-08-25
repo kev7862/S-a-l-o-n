@@ -65,4 +65,11 @@ public class Appointment {
     }
   }
 
+  public static List<Appointment> all() {
+    String sql = "SELECT * FROM appointments ORDER BY time";
+    try(Connection cn = DB.sql2o.open()) {
+      return cn.createQuery(sql).executeAndFetch(Appointment.class);
+    }
+  }
+
 }
