@@ -43,6 +43,17 @@ public class Client {
   public int getStylistId() {
     return stylistid;
   }
+// Trying to Establish a connection to the database and update the clients first name by id.
+  public void setFirstName(String name) {
+    this.firstname=name;
+    try(Connection cn = DB.sql2o.open()) {
+      String sql = "UPDATE clients SET firstname = :firstname WHERE id = :id";
+      cn.createQuery(sql)
+        .addParameter("firstname", name)
+        .addParameter("id", id)
+        .executeUpdate();
+    }
+  }
 
 
 }
