@@ -18,6 +18,24 @@ public class Client {
     this.phonenumber = phonenumber;
     this.stylistid = stylistid;
 
+// Trying to Establish a connection into the database clients table and insert parameters.
+    try(Connection cn = DB.sql2o.open()) {
+      String sql = "INSERT INTO clients (firstname, lastname, phonenumber, email, age, stylistid) VALUES (:firstname, :lastname, :phonenumber, :email, :age, :stylistid)";
+      this.id = (int) cn.createQuery(sql, true)
+        .addParameter("lastname", this.lastname)
+        .addParameter("firstname", this.firstname)
+        .addParameter("phonenumber", this.phonenumber)
+        .addParameter("email", this.email)
+        .addParameter("age", this.age)
+        .addParameter("stylistid", this.stylistid)
+        .executeUpdate()
+        .getKey();
+    }
+
+  }
+
+  public int getId() {
+    return id;
   }
 
   public String getFirstName() {
@@ -43,6 +61,7 @@ public class Client {
   public int getStylistId() {
     return stylistid;
   }
+
 // Trying to Establish a connection to the database and update the clients first name by id.
   public void setFirstName(String name) {
     this.firstname=name;
