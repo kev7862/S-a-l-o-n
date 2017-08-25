@@ -54,4 +54,15 @@ public class Appointment {
     return Procedure.find(procedureid);
   }
 
+//Trying to connect to the database and into the appointments table.
+  public static Appointment find(int id) {
+    try(Connection cn = DB.sql2o.open()) {
+      String sql = "SELECT * FROM appointments WHERE id=:id";
+      Appointment appointment = cn.createQuery(sql)
+        .addParameter("id", id)
+        .executeAndFetchFirst(Appointment.class);
+      return appointment;
+    }
+  }
+
 }
