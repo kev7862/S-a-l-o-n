@@ -13,6 +13,16 @@ public class Appointment {
     this.clientid = clientid;
     this.procedureid = procedureid;
 
+// Trying to connect to the database.
+    try(Connection cn = DB.sql2o.open()) {
+    String sql = "INSERT INTO appointments (time, clientid, procedureid) VALUES (:time, :clientid, :procedureid)";
+    this.id = (int) cn.createQuery(sql, true)
+      .addParameter("time", this.time)
+      .addParameter("clientid", this.clientid)
+      .addParameter("procedureid", this.procedureid)
+      .executeUpdate()
+      .getKey();
+  }
 
   }
 
