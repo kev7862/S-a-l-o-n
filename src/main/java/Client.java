@@ -121,5 +121,40 @@ public void setPhoneNumber(String phone) {
     }
   }
 
+  public static Client find(int id) {
+  try(Connection cn = DB.sql2o.open()) {
+    String sql = "SELECT * FROM clients WHERE id=:id";
+    Client client = cn.createQuery(sql)
+      .addParameter("id", id)
+      .executeAndFetchFirst(Client.class);
+    return client;
+  }
+}
+
+// Establishing connection then Creating a client list
+public static List<Client> allByStylist(int id) {
+  String sql = "SELECT * FROM clients WHERE stylistid = :id ORDER BY lastname, firstname, age";
+  try(Connection cn = DB.sql2o.open()) {
+    return cn.createQuery(sql)
+    .addParameter("id", id)
+    .executeAndFetch(Client.class);
+  }
+}
+
+public static List<Client> all() {
+  String sql = "SELECT * FROM clients ORDER BY lastname, firstname, age";
+  try(Connection cn = DB.sql2o.open()) {
+    return cn.createQuery(sql).executeAndFetch(Client.class);
+  }
+}
+
+public static void delete(int id) {
+  try(Connection cn = DB.sql2o.open()) {
+    String sql = "DELETE FROM clients WHERE id = :id;";
+    cn.createQuery(sql)
+    .addParameter("id", id)
+    .executeUpdate();
+  }
+}
 
 }
