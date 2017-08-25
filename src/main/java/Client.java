@@ -97,5 +97,17 @@ public void setPhoneNumber(String phone) {
     }
   }
 
+// Trying to Establish a connection to database clients table and setEmail by id
+  public void setEmail(String email) {
+    this.email=email;
+    try(Connection cn = DB.sql2o.open()) {
+      String sql = "UPDATE clients SET email = :email WHERE id = :id";
+      cn.createQuery(sql)
+        .addParameter("email", email)
+        .addParameter("id", id)
+        .executeUpdate();
+    }
+  }
+
 
 }
