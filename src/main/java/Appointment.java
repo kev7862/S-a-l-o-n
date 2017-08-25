@@ -15,4 +15,33 @@ public class Appointment {
 
 
   }
+
+  public int getId() {
+    return id;
+  }
+
+  public String getTime() {
+    return time;
+  }
+
+  public int getClientId() {
+    return clientid;
+  }
+
+  public Client getClient() {
+    return Client.find(clientid);
+  }
+
+  public Stylist getStylist() {
+    return Stylist.find(Client.find(clientid).getStylistId());
+  }
+
+  public int getProcedureId() {
+    return procedureid;
+  }
+
+  public Procedure getProcedure() {
+    return Procedure.find(procedureid);
+  }
+
 }
