@@ -19,3 +19,30 @@ public class Client {
     this.stylistid = stylistid;
 
   }
+
+  public String getFirstName() {
+    return firstname;
+  }
+
+  public String getLastName() {
+    return lastname;
+  }
+
+  public String getPhoneNumber() {
+    return phonenumber;
+  }
+
+  public String getEmail() {
+    return email;
+  }
+
+  public int getAge() {
+    return age;
+  }
+
+  public int getStylistId() {
+    return stylistid;
+  }
+
+
+}
