@@ -64,11 +64,20 @@ public class Appointment {
       return appointment;
     }
   }
-
+//Created a list in the database and sort them in order of time.
   public static List<Appointment> all() {
     String sql = "SELECT * FROM appointments ORDER BY time";
     try(Connection cn = DB.sql2o.open()) {
       return cn.createQuery(sql).executeAndFetch(Appointment.class);
+    }
+  }
+// Try connection to database and Create a delete function from the appointments table
+  public static void delete(int id) {
+    try(Connection cn = DB.sql2o.open()) {
+      String sql = "DELETE FROM appointments WHERE id = :id;";
+      cn.createQuery(sql)
+      .addParameter("id", id)
+      .executeUpdate();
     }
   }
 
