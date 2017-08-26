@@ -17,4 +17,12 @@ public class Stylist {
       .getKey();
   }
   }
+
+  public int getId() {
+  return id;
+}
+
+public String getName() {
+  return name;
+}
 }
