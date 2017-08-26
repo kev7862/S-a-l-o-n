@@ -45,13 +45,24 @@ public String getName() {
       .addParameter("id", id)
       .executeAndFetchFirst(Stylist.class);
     return stylist;
-  }
+
 }
+ //We're creatin a List, using the all() we try to make a connection to database stylists table and display data in order of name.
 
 public static List<Stylist> all() {
     String sql = "SELECT * FROM stylists ORDER BY name";
     try(Connection cn = DB.sql2o.open()) {
       return cn.createQuery(sql).executeAndFetch(Stylist.class);
+    }
+  }
+
+// Using the delete(), We try to Establish a connection to database stylists table and delete any field with a specific id.
+  public static void delete(int id) {
+    try(Connection cn = DB.sql2o.open()) {
+      String sql = "DELETE FROM stylists WHERE id = :id;";
+      cn.createQuery(sql)
+      .addParameter("id", id)
+      .executeUpdate();
     }
   }
 }
