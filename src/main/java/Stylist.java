@@ -25,4 +25,16 @@ public class Stylist {
 public String getName() {
   return name;
 }
+
+//  Trying to make connection to stylists database table and fetch name by id.
+  public void setName(String name) {
+    this.name=name;
+    try(Connection cn = DB.sql2o.open()) {
+      String sql = "UPDATE stylists SET name = :name WHERE id = :id";
+      cn.createQuery(sql)
+        .addParameter("name", name)
+        .addParameter("id", id)
+        .executeUpdate();
+    }
+  }
 }
