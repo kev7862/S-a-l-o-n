@@ -47,4 +47,11 @@ public String getName() {
     return stylist;
   }
 }
+
+public static List<Stylist> all() {
+    String sql = "SELECT * FROM stylists ORDER BY name";
+    try(Connection cn = DB.sql2o.open()) {
+      return cn.createQuery(sql).executeAndFetch(Stylist.class);
+    }
+  }
 }
