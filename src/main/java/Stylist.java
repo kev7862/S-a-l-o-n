@@ -5,6 +5,7 @@ import java.util.List;
 public class Stylist {
   private String name;
   private int id=0;
+
 //setting the variable into a class
   public Stylist(String name) {
     this.name=name;
@@ -46,6 +47,7 @@ public String getName() {
       .executeAndFetchFirst(Stylist.class);
     return stylist;
 
+}
 }
  //We're creatin a List, using the all() we try to make a connection to database stylists table and display data in order of name.
 
