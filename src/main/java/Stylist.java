@@ -37,4 +37,14 @@ public String getName() {
         .executeUpdate();
     }
   }
+// Using the find() We're trying to connect to the database stylist table and display everything with an id
+  public static Stylist find(int id) {
+  try(Connection cn = DB.sql2o.open()) {
+    String sql = "SELECT * FROM stylists WHERE id=:id";
+    Stylist stylist = cn.createQuery(sql)
+      .addParameter("id", id)
+      .executeAndFetchFirst(Stylist.class);
+    return stylist;
+  }
+}
 }
