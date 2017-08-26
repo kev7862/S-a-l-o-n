@@ -131,7 +131,7 @@ public void setPhoneNumber(String phone) {
   }
 }
 
-// Establishing connection then Creating a client list
+// Establishing connection to database clients table then Creating a client list
 public static List<Client> allByStylist(int id) {
   String sql = "SELECT * FROM clients WHERE stylistid = :id ORDER BY lastname, firstname, age";
   try(Connection cn = DB.sql2o.open()) {
