@@ -38,7 +38,7 @@ public void setDescription(String description) {
       .executeUpdate();
   }
 }
-// Using the get() to fetcch info from the Procedure class.
+// Using the get() to fetch info from the Procedure class.
 public float getPrice() {
   return price;
 }
@@ -52,6 +52,16 @@ public void setPrice(float price) {
       .addParameter("price", price)
       .addParameter("id", id)
       .executeUpdate();
+  }
+}
+// Using the find() we try to make a connection to the database procedures table, and display any data with an id.
+public static Procedure find(int id) {
+  try(Connection cn = DB.sql2o.open()) {
+    String sql = "SELECT * FROM procedures WHERE id=:id";
+    Procedure procedure = cn.createQuery(sql)
+      .addParameter("id", id)
+      .executeAndFetchFirst(Procedure.class);
+    return procedure;
   }
 }
 
