@@ -19,3 +19,13 @@ public class Procedure {
       .getKey();
   }
 }
+// Using the get() method to fetch information Procedure class.
+public int getId() {
+  return id;
+}
+
+public String getDescription() {
+  return description;
+}
+
+}
