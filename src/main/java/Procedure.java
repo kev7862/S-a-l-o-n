@@ -38,5 +38,21 @@ public void setDescription(String description) {
       .executeUpdate();
   }
 }
+// Using the get() to fetcch info from the Procedure class.
+public float getPrice() {
+  return price;
+}
+
+// Using set() we try to make a connection to the database procedures table, and update value in the price column using its specific id.
+public void setPrice(float price) {
+  this.price=price;
+  try(Connection cn = DB.sql2o.open()) {
+    String sql = "UPDATE procedures SET price = :price WHERE id = :id";
+    cn.createQuery(sql)
+      .addParameter("price", price)
+      .addParameter("id", id)
+      .executeUpdate();
+  }
+}
 
 }
