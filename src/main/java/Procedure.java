@@ -27,5 +27,16 @@ public int getId() {
 public String getDescription() {
   return description;
 }
+// Tring to make a connection to the database procedures table and using the set method set the description column using specific id.
+public void setDescription(String description) {
+  this.description=description;
+  try(Connection cn = DB.sql2o.open()) {
+    String sql = "UPDATE procedures SET description = :description WHERE id = :id";
+    cn.createQuery(sql)
+      .addParameter("description", description)
+      .addParameter("id", id)
+      .executeUpdate();
+  }
+}
 
 }
