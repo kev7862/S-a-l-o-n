@@ -64,5 +64,12 @@ public static Procedure find(int id) {
     return procedure;
   }
 }
+// We're trying to make a connection to the procedures table and create a List. using the all() display everything in order of price. 
+public static List<Procedure> all() {
+  String sql = "SELECT * FROM procedures ORDER BY price";
+  try(Connection cn = DB.sql2o.open()) {
+    return cn.createQuery(sql).executeAndFetch(Procedure.class);
+  }
+}
 
 }
