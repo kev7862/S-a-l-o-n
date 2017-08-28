@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col-md-6">
+  <div class="page-header">
+    <h1>Update Stylist<small></small></h1>
+  </div>
+    <form action='/stylists' method="post">
+      <div class="form-group">
+        <label for="stylist">Stylist: </label>
+        <input id="stylist" name="stylist" class="form-control" type="text" value="stylists name">
+      </div>
+      <button type='submit' class='btn'>Update Stylist</button>
+    </form>
+  </div>
+
+    #foreach($client in $clients)
+      <li><a href="/clients/$client.getId()">$client.getLastName(), $client.getFirstName()</a></li>
+    #end
+    </ul>
+    <p><a href="/delete/stylists/$stylist.getId()">delete stylist</a></p>
+  </div>
+</div>
