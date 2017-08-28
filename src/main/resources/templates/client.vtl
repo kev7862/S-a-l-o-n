@@ -1,0 +1,53 @@
+<div class="row">
+  <div class="col-xs-8">
+    <h2>Our Clients</h2>
+    #foreach($client in $clients)
+      <div>
+        <h3><a href="/clients/$client.getId()">$client.getLastName(), $client.getFirstName()</a></h3>
+      </div>
+    #end
+  </div>
+  <div class="col-xs-4">
+    #if($first)
+    <h2>Client Added</h2>
+    <h4>$first $last ($age)</h4>
+    <p>$phone</p>
+    <p>$email</p>
+    #end
+    <h2>Add Client</h2>
+    <form action='/clients' method="post">
+    <div class="form-group">
+      <label for="stylist">Select Stylist: </label>
+      <select id="stylist" name="stylist" class="form-control">
+        #foreach($stylist in $stylists)
+          <option value="$stylist.getId()">$stylist.getName()</option>
+        #end
+      </select>
+    </div>
+      <div class="form-group">
+        <label for="first">First name: </label>
+        <input id="first" name="first" class="form-control" type="text">
+      </div>
+      <div class="form-group">
+        <label for="last">Last Name: </label>
+        <input id="last" name="last" class="form-control" type="text">
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone Number: </label>
+        <input id="phone" name="phone" class="form-control" type="text">
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email: </label>
+        <input id="email" name="email" class="form-control" type="text">
+      </div>
+
+      <div class="form-group">
+        <label for="age">Age: </label>
+        <input id="age" name="age" class="form-control" type="text">
+      </div>
+      
+      <button type='submit' class='btn'>Add Client!</button>
+    </form>
+  </div>
+</div>
