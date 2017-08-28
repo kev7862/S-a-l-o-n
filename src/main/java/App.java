@@ -54,5 +54,26 @@ public class App {
     return new ModelAndView(model, layout);
   }, new VelocityTemplateEngine());
 
+  post("/clients", (request, response) -> {
+  Map<String, Object> model = new HashMap<String, Object>();
+  Client client = new Client(
+    request.queryParams("first"),
+    request.queryParams("last"),
+    request.queryParams("phone"),
+    request.queryParams("email"),
+    Integer.parseInt(request.queryParams("age")),
+    Integer.parseInt(request.queryParams("stylist"))
+  );
+  model.put("first", client.getFirstName());
+  model.put("last", client.getLastName());
+  model.put("phone", client.getPhoneNumber());
+  model.put("email", client.getEmail());
+  model.put("age", client.getAge());
+  model.put("clients", Client.all());
+  model.put("template", "templates/clients.vtl");
+  model.put("stylists", Stylist.all());
+  return new ModelAndView(model, layout);
+}, new VelocityTemplateEngine());
+
   }
 }
