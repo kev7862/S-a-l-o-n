@@ -70,8 +70,16 @@ public class App {
   model.put("email", client.getEmail());
   model.put("age", client.getAge());
   model.put("clients", Client.all());
-  model.put("template", "templates/clients.vtl");
+  model.put("template", "templates/client.vtl");
   model.put("stylists", Stylist.all());
+  return new ModelAndView(model, layout);
+}, new VelocityTemplateEngine());
+
+get("/client", (request, response) -> {
+  Map<String, Object> model = new HashMap<String, Object>();
+  model.put("clients", Client.all());
+  model.put("stylists", Stylist.all());
+  model.put("template", "templates/clients.vtl");
   return new ModelAndView(model, layout);
 }, new VelocityTemplateEngine());
 
