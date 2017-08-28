@@ -83,5 +83,15 @@ get("/client", (request, response) -> {
   return new ModelAndView(model, layout);
 }, new VelocityTemplateEngine());
 
+post("/procedures", (request, response) -> {
+    Map<String, Object> model = new HashMap<String, Object>();
+    Procedure procedure = new Procedure(request.queryParams("procedure"), Float.parseFloat(request.queryParams("price")));
+    model.put("procedure", procedure.getDescription());
+    model.put("price", procedure.getPrice());
+    model.put("procedures", Procedure.all());
+    model.put("template", "templates/procedure.vtl");
+    return new ModelAndView(model, layout);
+  }, new VelocityTemplateEngine());
+
   }
 }
