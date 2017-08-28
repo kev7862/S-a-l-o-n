@@ -93,5 +93,12 @@ post("/procedures", (request, response) -> {
     return new ModelAndView(model, layout);
   }, new VelocityTemplateEngine());
 
+  get("/procedures", (request, response) -> {
+  Map<String, Object> model = new HashMap<String, Object>();
+  model.put("procedures", Procedure.all());
+  model.put("template", "templates/procedure.vtl");
+  return new ModelAndView(model, layout);
+}, new VelocityTemplateEngine());
+
   }
 }
