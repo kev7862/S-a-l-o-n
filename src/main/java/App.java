@@ -54,6 +54,15 @@ public class App {
     return new ModelAndView(model, layout);
   }, new VelocityTemplateEngine());
 
+  get("/delete/stylists/:id", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      int id = Integer.parseInt(request.params(":id"));
+      Stylist.delete(id);
+      response.redirect("/stylists");
+      model.put("template", "templates/stylist.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
   post("/clients", (request, response) -> {
   Map<String, Object> model = new HashMap<String, Object>();
   Client client = new Client(
